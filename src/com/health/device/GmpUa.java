@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.util.SparseArray;
 
+import com.health.database.Tables;
 import com.health.util.MyArrays;
 
 /**
@@ -212,8 +213,8 @@ public class GmpUa {
 		public static class Builder {
 			private static final String NEGTIVE = "-";// 阴性
 			private static final String NORMAL = "+-";// 正常？
-			private static final String[] PH = { "0-5.0", "1-6.0", "2-6.5",
-					"3-7.0", "4-7.5", "5-8.0", "6-8.5" };
+			private static final String[] PH = { "5.0", "6.0", "6.5", "7.0",
+					"7.5", "8.0", "8.5" };
 			private String date = null;
 			private String leu = null;
 			private String bld = null;
@@ -319,5 +320,95 @@ public class GmpUa {
 				return "+" + (code - 1);
 			}
 		}
+	}
+
+	/***
+	 * 画图数据转换工具
+	 * 
+	 * @author jiqunpeng
+	 * 
+	 *         创建时间：2014-1-2 下午1:54:14
+	 */
+	public static class CharTranslator {
+		private final static String[] itemValues = new String[] { "1", "1.005",
+				"1.01", "1.015", "1.02", "1.025", "1.03", "sg", "5.0", "6.0",
+				"6.5", "7.0", "7.5", "8.0", "8.5", "ph", "-", "+-", "+1", "+2",
+				"+3", "vc", "-", "+-", "+1", "+2", "+3", "+4", "glu", "-",
+				"+1", "+2", "+3", "bil", "-", "+-", "+1", "+2", "+-", "ket",
+				"-", "+-", "+1", "+2", "+3", "bld", "-", "+-", "+1", "+2",
+				"+3", "+4", "pro", "-", "+1", "+2", "+3", "ubg", "-", "+",
+				"nit", "-", "+-", "+1", "+2", "+3", "leu" };
+		private final static String[] sgItems = new String[] { "1", "1.005",
+				"1.01", "1.015", "1.02", "1.025", "1.03", "sg" };
+		private final static String[] phItems = new String[] { "5.0", "6.0",
+				"6.5", "7.0", "7.5", "8.0", "8.5", "ph" };
+		private final static String[] vcItems = new String[] { "-", "+-", "+1",
+				"+2", "+3", "vc" };
+		private final static String[] gluItems = new String[] { "-", "+-",
+				"+1", "+2", "+3", "+4", "glu" };
+		private final static String[] bilItems = new String[] { "-", "+1",
+				"+2", "+3", "bil" };
+		private final static String[] ketItems = new String[] { "-", "+-",
+				"+1", "+2", "+-", "ket" };
+		private final static String[] bldItems = new String[] { "-", "+-",
+				"+1", "+2", "+3", "bld" };
+		private final static String[] proItems = new String[] { "-", "+-",
+				"+1", "+2", "+3", "+4", "pro" };
+		private final static String[] ubgItems = new String[] { "-", "+1",
+				"+2", "+3", "ubg" };
+		private final static String[] nitItems = new String[] { "-", "+", "nit" };
+		private final static String[] leuItems = new String[] { "-", "+-",
+				"+1", "+2", "+3", "leu" };
+
+		private final static int OFFSET_SG = 0;
+		private final static int OFFSET_PH = sgItems.length + OFFSET_SG;
+		private final static int OFFSET_VC = OFFSET_PH + phItems.length;
+		private final static int OFFSET_GLU = OFFSET_VC + vcItems.length;;
+		private final static int OFFSET_BIL = OFFSET_GLU + gluItems.length;
+		private final static int OFFSET_KET = OFFSET_BIL + bilItems.length;
+		private final static int OFFSET_BLD = OFFSET_KET + ketItems.length;
+		private final static int OFFSET_PRO = OFFSET_BLD + bldItems.length;
+		private final static int OFFSET_UBG = OFFSET_PRO + proItems.length;
+		private final static int OFFSET_NIT = OFFSET_UBG + ubgItems.length;
+		private final static int OFFSET_LEU = OFFSET_NIT + nitItems.length;
+
+		public static String getMark(double value) {
+			int iValue = (int) value;
+			return itemValues[iValue];
+
+		}
+
+		public static double getValue(String token, String strValue) {
+			int offset = 0;
+			if (token.equals(Tables.LEU)) {
+				offset = OFFSET_LEU;
+			} else if (token.equals(Tables.BLD)) {
+				offset = OFFSET_BLD;
+			} else if (token.equals(Tables.PH)) {
+				offset = OFFSET_PH;
+			} else if (token.equals(Tables.PRO)) {
+				offset = OFFSET_PRO;
+			} else if (token.equals(Tables.UBG)) {
+				offset = OFFSET_UBG;
+			} else if (token.equals(Tables.NIT)) {
+				offset = OFFSET_NIT;
+			} else if (token.equals(Tables.KET)) {
+				offset = OFFSET_KET;
+			} else if (token.equals(Tables.BIL)) {
+				offset = OFFSET_BIL;
+			} else if (token.equals(Tables.UGLU)) {
+				offset = OFFSET_GLU;
+			} else if (token.equals(Tables.VC)) {
+				offset = OFFSET_VC;
+			} else if (token.equals(Tables.SG)) {
+				offset = OFFSET_SG;
+			}
+			for (int i = offset; i < itemValues.length; i++) {
+				if (itemValues[i].equals(strValue))
+					return i;
+			}
+			return 0;
+		}
+
 	}
 }

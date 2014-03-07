@@ -90,9 +90,20 @@ public class Cache {
 	 */
 	public void saveItem(String item, Map<String, String> dataMap) {
 		JSONObject json = new JSONObject(dataMap);
+		saveItem(item, json);
+	}
+
+	/***
+	 * 保存当前用户item测量数据
+	 * 
+	 * @param item
+	 * @param json
+	 */
+	public void saveItem(String item, JSONObject json) {
 		String id = getUserId();
 		editor.putString(id + item, json.toString());
 		editor.commit();// 提交
+
 	}
 
 	/**
@@ -155,4 +166,5 @@ public class Cache {
 		return userName;
 
 	}
+
 }

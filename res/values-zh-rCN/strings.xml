@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+   
     <string name="leu">白细胞</string>
     <string name="nit">亚硝酸盐</string>
     <string name="ubg">尿胆原</string>
@@ -12,7 +13,7 @@
     <string name="bil">胆红素</string>
     <string name="glu">葡萄糖</string>
     <string name="vc">维生素C</string>
-    <string name="app_name">爱一通健康</string>
+    <string name="app_name">爱意通</string>
     <string name="myhealth">我的健康</string>
     <string name="test">进行测试</string>
     <string name="teleference">远程医疗</string>
@@ -27,7 +28,7 @@
     <string name="test_taixin">胎心测量</string>
     <string name="test_zhifang">脂肪仪</string>
     <string name="appname">益体康蓝牙设备演示</string>
-    <string name="bp">蓝牙血压演示</string>
+    <string name="bp_show">蓝牙血压演示</string>
     <string name="ecg">蓝牙心电演示</string>
     <string name="open">打开设备</string>
     <string name="close">关闭设备</string>
@@ -41,8 +42,7 @@
     <string name="bt_not_enabled">本机无蓝牙</string>
     <string name="sys">收缩压</string>
     <string name="dia">舒张压</string>
-    <string name="pulse">脉率</string>
-    <string name="start_measurement">开始测量</string>
+    <string name="start_measurement">开始血压测量</string>
     <string name="find_device">查找设备</string>
     <string name="connecting">正在连接</string>
     <string name="unconnect">未连接</string>

@@ -34,7 +34,7 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="5dp"
             android:background="@drawable/centerbg" >
 
             <LinearLayout
@@ -47,12 +47,12 @@
                 android:orientation="vertical"
                 android:padding="10dp" >
 
-                <EditText
+                <AutoCompleteTextView
                     android:id="@+id/cardNumAuto"
                     android:layout_width="200dp"
                     android:layout_height="wrap_content"
+                    android:completionThreshold="1"
                     android:hint="输入您的账号"
-                    android:inputType="none"
                     android:maxLength="18" />
 
                 <EditText
@@ -80,7 +80,7 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
+            android:layout_margin="2dp"
             android:src="@drawable/pingantong" />
     </LinearLayout>
 

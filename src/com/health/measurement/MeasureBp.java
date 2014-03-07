@@ -83,7 +83,7 @@ public class MeasureBp extends BaseActivity {
 
 	private static String btName = "PC_300SNT";// 蓝牙名称
 	private static String btMac = null;// 蓝牙名称
-	private static Context context;	
+	private static Context context;
 	private static boolean stop = false;
 	private LinearLayout graphLayout;// 装血氧图的布局
 	private static GraphicalView boWaveView;// 血氧图
@@ -236,7 +236,7 @@ public class MeasureBp extends BaseActivity {
 				&& bluetoothService.getState() == BluetoothService.STATE_CONNECTED) {
 			status = View.VISIBLE;// 连接时设置可见
 		} else {
-			status = View.GONE;// 未连接时设置不可见
+			status = View.INVISIBLE;// 未连接时设置不可见
 		}
 		measureButton.setVisibility(status);
 		stableBoButton.setVisibility(status);
@@ -292,17 +292,14 @@ public class MeasureBp extends BaseActivity {
 	 * 进行测量、或者停止测量
 	 */
 	private void takeMeasureBp() {
-		if (bluetoothService.getState() == BluetoothService.STATE_CONNECTED) {
-			uploadButton.setEnabled(true);
-			uploadButton.setClickable(true);// 设置可以点击
+		if (bluetoothService.getState() == BluetoothService.STATE_CONNECTED) {			
 			if (stop == false) {
-				bluetoothService.write(PC300.COMMAND_BP_START);
-				bluetoothService.write(PC300.COMMAND_TEMP_START);
+				bluetoothService.write(PC300.COMMAND_BP_START);				
 				initDataTextEdit();
-				measureButton.setText("停止测量");
+				measureButton.setText("停止血压测量");
 			} else {
 				bluetoothService.write(PC300.COMMAND_BP_STOP);
-				measureButton.setText("开始测量");
+				measureButton.setText("开始血压测量");
 			}
 			stop = !stop;
 		}
@@ -388,6 +385,9 @@ public class MeasureBp extends BaseActivity {
 				switch (msg.arg1) {
 				case BluetoothService.STATE_CONNECTED:
 					statusView.setText(btName);
+					bluetoothService.write(PC300.COMMAND_TEMP_START);
+					uploadButton.setEnabled(true);
+					uploadButton.setClickable(true);// 设置可以点击
 					Toast.makeText(context, "已连接到$$" + btName,
 							Toast.LENGTH_LONG).show();
 					setVisibility();// 设置测量按钮可见
@@ -417,7 +417,6 @@ public class MeasureBp extends BaseActivity {
 				if (DEBUG) {
 					// Log.d(TAG, readMessage);
 					Log.d(TAG, Arrays.toString(readBuf));
-
 				}
 				break;
 			case BluetoothService.MESSAGE_TOAST:
@@ -485,13 +484,13 @@ public class MeasureBp extends BaseActivity {
 				break;
 			case PC300.TOKEN_BO_PAKAGE:
 				Integer spO2 = pc300.getSpO2(datas.get(datas.size() - 1));
-				if (!boStable && !stop)//按下开始测量后，才显示数据
+				if (!boStable)
 					boEditText.setText(spO2.toString());
 				break;
 
 			case PC300.TOKEN_TEMP:
 				Float temp = pc300.getTemp(datas.get(datas.size() - 1));
-				if (!tempStable && !stop)//按下开始测量后，才显示数据
+				if (!tempStable)
 					tempEditText.setText(temp.toString());
 				break;
 			}

@@ -7,7 +7,7 @@
     <LinearLayout
         android:id="@+id/topbar"
         android:layout_width="fill_parent"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/topbar_height"
         android:background="@drawable/topbg"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
@@ -42,6 +42,8 @@
             android:background="@drawable/centerbg"
             android:orientation="horizontal" >
 
+          
+
             <LinearLayout
                 android:layout_width="267dp"
                 android:layout_height="190dp"
@@ -73,7 +75,7 @@
     <LinearLayout
         android:id="@+id/bottombar"
         android:layout_width="fill_parent"
-        android:layout_height="50dp"
+        android:layout_height="@dimen/bottombar_height"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bottombg"
         android:gravity="center_vertical"

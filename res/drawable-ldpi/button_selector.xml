@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- 按钮可用，并且处于按下状态时显示这个状态 -->
+    <item android:drawable="@color/c1" android:state_enabled="true" android:state_pressed="true"/>
+    <!-- 按钮可用，并且处于聚焦状态时显示这个状态 -->
+    <item android:drawable="@color/c5" android:state_enabled="true" android:state_focused="true"/>
+    <!-- 被选中时显示这个状态 -->
+    <item android:drawable="@color/c2" android:state_selected="true"/>
+    <!-- 按钮不可用状态时显示这个状态 -->
+    <item android:drawable="@color/c3" android:state_enabled="false"/>
+    <!-- 按钮可用，并且处于正常状态时显示这个状态 -->
+    <item android:drawable="@color/c4"/>
+
+</selector>

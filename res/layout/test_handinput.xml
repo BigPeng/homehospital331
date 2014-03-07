@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/background"
-    android:orientation="vertical" >
+    android:background="@drawable/background" >
+
+    <!-- 标题 -->
 
     <LinearLayout
+        android:id="@+id/top_bar"
         android:layout_width="fill_parent"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/topbar_height"
         android:background="@drawable/topbg"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
@@ -39,19 +41,24 @@
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="375dp"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/bottom_bar"
+        android:layout_below="@+id/top_bar"
         android:orientation="horizontal" >
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_margin="5px"
+            android:layout_margin="5dp"
             android:background="@drawable/centerbg"
             android:orientation="horizontal" >
 
+            <!-- 左侧菜单 -->
+
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="5dp"
                 android:background="@drawable/myhealth_healthreport_leftbackground"
                 android:gravity="center_horizontal"
                 android:orientation="vertical" >
@@ -62,26 +69,39 @@
                     android:paddingTop="10dp"
                     android:src="@drawable/testlittle" />
 
-                <Button
-                    android:id="@+id/test_handinput_machinebtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginBottom="40dp"
-                    android:layout_marginTop="40dp"
-                    android:background="@drawable/test_devicebtn"
-                    android:textColor="#ff444444"
-                    android:textSize="18px" />
+                <TableLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
 
-                <Button
-                    android:id="@+id/test_handinput_handbtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@drawable/test_handinputbtn"
-                    android:textColor="#ff444444"
-                    android:textSize="18px" />
+                    <TableRow
+                        android:layout_weight="1"
+                        android:gravity="center" >
+
+                        <Button
+                            android:id="@+id/test_machinebtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/test_devicebtn"
+                            android:textColor="#ff444444"
+                            android:textSize="@dimen/text_size_2" />
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_weight="1"
+                        android:gravity="center" >
+
+                        <Button
+                            android:id="@+id/test_handbtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/test_handinputbtn"
+                            android:textColor="#ff444444"
+                            android:textSize="@dimen/text_size_2" />
+                    </TableRow>
+                </TableLayout>
             </LinearLayout>
+
+            <!-- 右侧内容 -->
 
             <ScrollView
                 android:layout_width="fill_parent"
@@ -93,29 +113,33 @@
 
                 <LinearLayout
                     android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="vertical" >
 
+                    <!-- 血压和脉率 -->
+
                     <LinearLayout
                         android:layout_width="fill_parent"
-                        android:layout_height="121dp"
+                        android:layout_height="170dp"
                         android:orientation="horizontal" >
 
                         <TextView
-                            android:layout_width="130dp"
+                            android:layout_width="170dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="45dp"
                             android:layout_marginTop="20dp"
-                            android:text="@string/test_handinput_bloodpressure"
+                            android:text="您的血压和脉率："
                             android:textColor="#ff444444"
-                            android:textSize="18px" >
+                            android:textSize="18sp" >
                         </TextView>
 
                         <LinearLayout
                             android:layout_width="320dp"
                             android:layout_height="fill_parent"
                             android:orientation="vertical" >
+
+                            <!-- 高压 -->
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -129,7 +153,7 @@
                                     android:layout_marginRight="10dp"
                                     android:text="@string/test_handinput_highBP"
                                     android:textColor="#ff444444"
-                                    android:textSize="18px" >
+                                    android:textSize="18sp" >
                                 </TextView>
 
                                 <EditText
@@ -137,7 +161,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="10dp"
-                                    android:background="@drawable/test_handinput_edittextbg" >
+                                    android:background="@drawable/test_handinput_edittextbg"
+                                    android:inputType="numberDecimal" >
                                 </EditText>
 
                                 <TextView
@@ -145,9 +170,11 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/test_handinput_BPunit"
                                     android:textColor="#ff444444"
-                                    android:textSize="18px" >
+                                    android:textSize="18sp" >
                                 </TextView>
                             </LinearLayout>
+
+                            <!-- 低压 -->
 
                             <LinearLayout
                                 android:layout_width="wrap_content"
@@ -161,7 +188,7 @@
                                     android:layout_marginRight="10dp"
                                     android:text="@string/test_handinput_lowBP"
                                     android:textColor="#ff444444"
-                                    android:textSize="18px" >
+                                    android:textSize="18sp" >
                                 </TextView>
 
                                 <EditText
@@ -169,7 +196,8 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_marginRight="10dp"
-                                    android:background="@drawable/test_handinput_edittextbg" >
+                                    android:background="@drawable/test_handinput_edittextbg"
+                                    android:inputType="numberDecimal" >
                                 </EditText>
 
                                 <TextView
@@ -177,7 +205,42 @@
                                     android:layout_height="wrap_content"
                                     android:text="@string/test_handinput_BPunit"
                                     android:textColor="#ff444444"
-                                    android:textSize="18px" >
+                                    android:textSize="18sp" >
+                                </TextView>
+                            </LinearLayout>
+
+                            <!-- 脉搏 -->
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal" >
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:text="脉率"
+                                    android:textColor="#ff444444"
+                                    android:textSize="18sp" >
+                                </TextView>
+
+                                <EditText
+                                    android:id="@+id/test_handinput_maiLvET"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/test_handinput_edittextbg"
+                                    android:inputType="number" >
+                                </EditText>
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/test_handinput_HRunit"
+                                    android:textColor="#ff444444"
+                                    android:textSize="18sp" >
                                 </TextView>
                             </LinearLayout>
                         </LinearLayout>
@@ -197,6 +260,8 @@
                         android:src="@drawable/test_handinput_cutline" >
                     </ImageView>
 
+                    <!-- 血氧 -->
+
                     <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="121dp"
@@ -207,26 +272,27 @@
                             android:layout_width="130dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="45dp"
-                            android:text="@string/test_handinput_heartrate"
+                            android:text="@string/test_handinput_XueYang"
                             android:textColor="#ff444444"
-                            android:textSize="18px" >
+                            android:textSize="18sp" >
                         </TextView>
 
                         <EditText
-                            android:id="@+id/test_handinput_HRedittext"
+                            android:id="@+id/test_handinput_XYedittext"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="45dp"
                             android:layout_marginRight="10dp"
-                            android:background="@drawable/test_handinput_edittextbg" >
+                            android:background="@drawable/test_handinput_edittextbg"
+                            android:inputType="numberDecimal" >
                         </EditText>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/test_handinput_HRunit"
+                            android:text="@string/test_handinput_XYunit"
                             android:textColor="#ff444444"
-                            android:textSize="18px" >
+                            android:textSize="18sp" >
                         </TextView>
 
                         <LinearLayout
@@ -236,7 +302,7 @@
                             android:orientation="horizontal" >
 
                             <Button
-                                android:id="@+id/test_handinput_HRBtn"
+                                android:id="@+id/test_handinput_XYBtn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="3dp"
@@ -252,115 +318,7 @@
                         android:src="@drawable/test_handinput_cutline" >
                     </ImageView>
 
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="121dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal" >
-
-                        <TextView
-                            android:layout_width="130dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="45dp"
-                            android:text="@string/test_handinput_ZhiFangLv"
-                            android:textColor="#ff444444"
-                            android:textSize="18px" >
-                        </TextView>
-
-                        <EditText
-                            android:id="@+id/test_handinput_ZFLedittext"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="45dp"
-                            android:layout_marginRight="10dp"
-                            android:background="@drawable/test_handinput_edittextbg" >
-                        </EditText>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/test_handinput_ZFLunit"
-                            android:textColor="#ff444444"
-                            android:textSize="18px" >
-                        </TextView>
-
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:gravity="right"
-                            android:orientation="horizontal" >
-
-                            <Button
-                                android:id="@+id/test_handinput_ZFLBtn"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="3dp"
-                                android:layout_marginTop="39dp"
-                                android:background="@drawable/test_handinput_okbtnxml" >
-                            </Button>
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/test_handinput_cutline" >
-                    </ImageView>
-
-                    <LinearLayout
-                        android:layout_width="fill_parent"
-                        android:layout_height="121dp"
-                        android:gravity="center_vertical"
-                        android:orientation="horizontal" >
-
-                        <TextView
-                            android:layout_width="130dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="45dp"
-                            android:text="@string/test_handinput_XueTang"
-                            android:textColor="#ff444444"
-                            android:textSize="18px" >
-                        </TextView>
-
-                        <EditText
-                            android:id="@+id/test_handinput_XTedittext"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="45dp"
-                            android:layout_marginRight="10dp"
-                            android:background="@drawable/test_handinput_edittextbg" >
-                        </EditText>
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@string/test_handinput_XTunit"
-                            android:textColor="#ff444444"
-                            android:textSize="18px" >
-                        </TextView>
-
-                        <LinearLayout
-                            android:layout_width="fill_parent"
-                            android:layout_height="fill_parent"
-                            android:gravity="right"
-                            android:orientation="horizontal" >
-
-                            <Button
-                                android:id="@+id/test_handinput_XTBtn"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="3dp"
-                                android:layout_marginTop="39dp"
-                                android:background="@drawable/test_handinput_okbtnxml" >
-                            </Button>
-                        </LinearLayout>
-                    </LinearLayout>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/test_handinput_cutline" >
-                    </ImageView>
+                    <!-- 体温 -->
 
                     <LinearLayout
                         android:layout_width="fill_parent"
@@ -374,7 +332,7 @@
                             android:layout_marginLeft="45dp"
                             android:text="@string/test_handinput_TiWen"
                             android:textColor="#ff444444"
-                            android:textSize="18px" >
+                            android:textSize="18sp" >
                         </TextView>
 
                         <EditText
@@ -383,7 +341,8 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="45dp"
                             android:layout_marginRight="10dp"
-                            android:background="@drawable/test_handinput_edittextbg" >
+                            android:background="@drawable/test_handinput_edittextbg"
+                            android:inputType="numberDecimal" >
                         </EditText>
 
                         <TextView
@@ -391,7 +350,7 @@
                             android:layout_height="wrap_content"
                             android:text="@string/test_handinput_TWunit"
                             android:textColor="#ff444444"
-                            android:textSize="18px" >
+                            android:textSize="18sp" >
                         </TextView>
 
                         <LinearLayout
@@ -417,6 +376,8 @@
                         android:src="@drawable/test_handinput_cutline" >
                     </ImageView>
 
+                    <!-- 血糖 -->
+
                     <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="121dp"
@@ -427,26 +388,27 @@
                             android:layout_width="130dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="45dp"
-                            android:text="@string/test_handinput_TaiXin"
+                            android:text="@string/test_handinput_XueTang"
                             android:textColor="#ff444444"
-                            android:textSize="18px" >
+                            android:textSize="18sp" >
                         </TextView>
 
                         <EditText
-                            android:id="@+id/test_handinput_TXedittext"
+                            android:id="@+id/test_handinput_XTedittext"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="45dp"
                             android:layout_marginRight="10dp"
-                            android:background="@drawable/test_handinput_edittextbg" >
+                            android:background="@drawable/test_handinput_edittextbg"
+                            android:inputType="numberDecimal" >
                         </EditText>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/test_handinput_TXunit"
+                            android:text="@string/test_handinput_XTunit"
                             android:textColor="#ff444444"
-                            android:textSize="18px" >
+                            android:textSize="18sp" >
                         </TextView>
 
                         <LinearLayout
@@ -456,7 +418,7 @@
                             android:orientation="horizontal" >
 
                             <Button
-                                android:id="@+id/test_handinput_TXBtn"
+                                android:id="@+id/test_handinput_XTBtn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="3dp"
@@ -472,6 +434,8 @@
                         android:src="@drawable/test_handinput_cutline" >
                     </ImageView>
 
+                    <!-- 尿酸 -->
+
                     <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="121dp"
@@ -482,26 +446,27 @@
                             android:layout_width="130dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="45dp"
-                            android:text="@string/test_handinput_TiZhong"
+                            android:text="@string/test_handinput_NiaoSuan"
                             android:textColor="#ff444444"
-                            android:textSize="18px" >
+                            android:textSize="18sp" >
                         </TextView>
 
                         <EditText
-                            android:id="@+id/test_handinput_TZedittext"
+                            android:id="@+id/test_handinput_NSedittext"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="45dp"
                             android:layout_marginRight="10dp"
-                            android:background="@drawable/test_handinput_edittextbg" >
+                            android:background="@drawable/test_handinput_edittextbg"
+                            android:inputType="numberDecimal" >
                         </EditText>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/test_handinput_TZunit"
+                            android:text="@string/test_handinput_XTunit"
                             android:textColor="#ff444444"
-                            android:textSize="18px" >
+                            android:textSize="18sp" >
                         </TextView>
 
                         <LinearLayout
@@ -511,7 +476,7 @@
                             android:orientation="horizontal" >
 
                             <Button
-                                android:id="@+id/test_handinput_TZBtn"
+                                android:id="@+id/test_handinput_NSBtn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="3dp"
@@ -527,6 +492,8 @@
                         android:src="@drawable/test_handinput_cutline" >
                     </ImageView>
 
+                    <!-- 总胆固醇 -->
+
                     <LinearLayout
                         android:layout_width="fill_parent"
                         android:layout_height="121dp"
@@ -537,26 +504,27 @@
                             android:layout_width="130dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="45dp"
-                            android:text="@string/test_handinput_XueYang"
+                            android:text="@string/test_handinput_ZongDanGuCun"
                             android:textColor="#ff444444"
-                            android:textSize="18px" >
+                            android:textSize="18sp" >
                         </TextView>
 
                         <EditText
-                            android:id="@+id/test_handinput_XYedittext"
+                            android:id="@+id/test_handinput_ZDGCedittext"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="45dp"
                             android:layout_marginRight="10dp"
-                            android:background="@drawable/test_handinput_edittextbg" >
+                            android:background="@drawable/test_handinput_edittextbg"
+                            android:inputType="numberDecimal" >
                         </EditText>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/test_handinput_XYunit"
+                            android:text="@string/test_handinput_XTunit"
                             android:textColor="#ff444444"
-                            android:textSize="18px" >
+                            android:textSize="18sp" >
                         </TextView>
 
                         <LinearLayout
@@ -566,7 +534,7 @@
                             android:orientation="horizontal" >
 
                             <Button
-                                android:id="@+id/test_handinput_XYBtn"
+                                android:id="@+id/test_handinput_ZDGCBtn"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="3dp"
@@ -574,6 +542,341 @@
                                 android:background="@drawable/test_handinput_okbtnxml" >
                             </Button>
                         </LinearLayout>
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/test_handinput_cutline" >
+                    </ImageView>
+
+                    <!-- 尿液分析 -->
+
+                    <LinearLayout
+                        android:layout_width="fill_parent"
+                        android:layout_height="600dp"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="170dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="45dp"
+                            android:layout_marginTop="20dp"
+                            android:text="您的尿液分析："
+                            android:textColor="#ff444444"
+                            android:textSize="18sp" >
+                        </TextView>
+
+                        <LinearLayout
+                            android:layout_width="320dp"
+                            android:layout_height="fill_parent"
+                            android:orientation="vertical" >
+
+                            <!-- 白细胞 -->
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal" >
+
+                                <TextView
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:text="白细胞"
+                                    android:textColor="#ff444444"
+                                    android:textSize="18sp" >
+                                </TextView>
+
+                                <EditText
+                                    android:id="@+id/test_handinput_baiXiBaoET"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/test_handinput_edittextbg"
+                                    android:inputType="none" >
+                                </EditText>
+                            </LinearLayout>
+
+                            <!-- 亚硝酸盐 -->
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal" >
+
+                                <TextView
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:text="亚硝酸盐"
+                                    android:textColor="#ff444444"
+                                    android:textSize="18sp" >
+                                </TextView>
+
+                                <EditText
+                                    android:id="@+id/test_handinput_yaXiaoSuanYanET"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/test_handinput_edittextbg"
+                                    android:inputType="none" >
+                                </EditText>
+                            </LinearLayout>
+
+                            <!-- 尿胆原 -->
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal" >
+
+                                <TextView
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:text="尿胆原"
+                                    android:textColor="#ff444444"
+                                    android:textSize="18sp" >
+                                </TextView>
+
+                                <EditText
+                                    android:id="@+id/test_handinput_niaoDanYuanET"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/test_handinput_edittextbg"
+                                    android:inputType="none" >
+                                </EditText>
+                            </LinearLayout>
+
+                            <!-- 蛋白质 -->
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal" >
+
+                                <TextView
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:text="蛋白质"
+                                    android:textColor="#ff444444"
+                                    android:textSize="18sp" >
+                                </TextView>
+
+                                <EditText
+                                    android:id="@+id/test_handinput_danBaiZiET"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/test_handinput_edittextbg"
+                                    android:inputType="none" >
+                                </EditText>
+                            </LinearLayout>
+
+                            <!-- PH值 -->
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal" >
+
+                                <TextView
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:text="PH值"
+                                    android:textColor="#ff444444"
+                                    android:textSize="18sp" >
+                                </TextView>
+
+                                <EditText
+                                    android:id="@+id/test_handinput_phZhiET"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/test_handinput_edittextbg"
+                                    android:inputType="none" >
+                                </EditText>
+                            </LinearLayout>
+
+                            <!-- 潜血 -->
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal" >
+
+                                <TextView
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:text="潜血"
+                                    android:textColor="#ff444444"
+                                    android:textSize="18sp" >
+                                </TextView>
+
+                                <EditText
+                                    android:id="@+id/test_handinput_qianXueET"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/test_handinput_edittextbg"
+                                    android:inputType="none" >
+                                </EditText>
+                            </LinearLayout>
+
+                            <!-- 酮体 -->
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal" >
+
+                                <TextView
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:text="酮体"
+                                    android:textColor="#ff444444"
+                                    android:textSize="18sp" >
+                                </TextView>
+
+                                <EditText
+                                    android:id="@+id/test_handinput_tongTiET"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/test_handinput_edittextbg"
+                                    android:inputType="none" >
+                                </EditText>
+                            </LinearLayout>
+
+                            <!-- 胆红素 -->
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal" >
+
+                                <TextView
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:text="胆红素"
+                                    android:textColor="#ff444444"
+                                    android:textSize="18sp" >
+                                </TextView>
+
+                                <EditText
+                                    android:id="@+id/test_handinput_danHongSuET"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/test_handinput_edittextbg"
+                                    android:inputType="none" >
+                                </EditText>
+                            </LinearLayout>
+
+                            <!-- 葡萄糖 -->
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal" >
+
+                                <TextView
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:text="葡萄糖"
+                                    android:textColor="#ff444444"
+                                    android:textSize="18sp" >
+                                </TextView>
+
+                                <EditText
+                                    android:id="@+id/test_handinput_puTaoTangET"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/test_handinput_edittextbg"
+                                    android:inputType="none" >
+                                </EditText>
+                            </LinearLayout>
+
+                            <!-- 维生素C -->
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal" >
+
+                                <TextView
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:text="维生素C"
+                                    android:textColor="#ff444444"
+                                    android:textSize="18sp" >
+                                </TextView>
+
+                                <EditText
+                                    android:id="@+id/test_handinput_weiShengSuCET"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/test_handinput_edittextbg"
+                                    android:inputType="none" >
+                                </EditText>
+                            </LinearLayout>
+
+                            <!-- 比重 -->
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:orientation="horizontal" >
+
+                                <TextView
+                                    android:layout_width="80dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:text="比重"
+                                    android:textColor="#ff444444"
+                                    android:textSize="18sp" >
+                                </TextView>
+
+                                <EditText
+                                    android:id="@+id/test_handinput_biZhongET"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="10dp"
+                                    android:background="@drawable/test_handinput_edittextbg"
+                                    android:inputType="none" >
+                                </EditText>
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/test_handinput_NYFXBtn"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:background="@drawable/test_handinput_okbtnxml" >
+                        </Button>
                     </LinearLayout>
 
                     <ImageView
@@ -586,9 +889,13 @@
         </LinearLayout>
     </LinearLayout>
 
+    <!-- 底部 -->
+
     <LinearLayout
+        android:id="@+id/bottom_bar"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="@dimen/bottombar_height"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/bottombg"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
@@ -617,4 +924,4 @@
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

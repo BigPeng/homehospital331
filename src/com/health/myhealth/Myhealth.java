@@ -17,7 +17,8 @@ public class Myhealth extends BaseActivity {
 	Button homeBtn;
 	Button healthreport;
 	Button testrecord;
-	//private static Button lastedRecordButton;
+
+	// private static Button lastedRecordButton;
 	OnClickListener btnClick;
 	TextView user;
 	int userid;
@@ -40,7 +41,6 @@ public class Myhealth extends BaseActivity {
 		homeBtn = (Button) findViewById(R.id.homebutton);
 		healthreport = (Button) findViewById(R.id.myhealth_healthreport);
 		testrecord = (Button) findViewById(R.id.myhealth_testrecord);
-	
 		btnClick = new OnClickListener() {
 
 			@Override
@@ -48,16 +48,8 @@ public class Myhealth extends BaseActivity {
 				Intent i = new Intent();
 				if (v == homeBtn) {
 					Myhealth.this.finish();
-				}
-
-//				else if (v == healthreport) {
-//					i.setClass(Myhealth.this, Historyreport.class);
-//					i.putExtra("userid", userid);
-//					i.putExtra("username", username);
-//					startActivityForResult(i, 1);
-//				} 
-				else if (v == testrecord) {
-					i.setClass(Myhealth.this, DataGraph.class);
+				} else if (v == testrecord) {
+					i.setClass(Myhealth.this, TableRecord.class);
 					i.putExtra("userid", userid);
 					i.putExtra("username", username);
 					startActivityForResult(i, 1);
@@ -73,7 +65,6 @@ public class Myhealth extends BaseActivity {
 		homeBtn.setOnClickListener(btnClick);
 		healthreport.setOnClickListener(btnClick);
 		testrecord.setOnClickListener(btnClick);
-		
 
 	}
 

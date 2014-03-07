@@ -7,7 +7,7 @@
     <RelativeLayout
         android:id="@+id/topbar"
         android:layout_width="fill_parent"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/topbar_height"
         android:layout_alignParentTop="true"
         android:background="@drawable/topbg" >
 
@@ -43,283 +43,293 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_above="@+id/botton_layout"
         android:layout_below="@+id/topbar"
         android:layout_margin="5dp"
-        android:background="@drawable/centerbg"
-        android:orientation="horizontal"
-        android:padding="10dp" >
+        android:background="@drawable/centerbg" >
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/cont_bg03"
-            android:orientation="vertical" >
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:id="@+id/hp_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/light_blue" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sys"
-                    android:textColor="@color/duckgrey"
-                    android:textSize="20dp" />
-
-                <EditText
-                    android:id="@+id/hp"
-                    android:layout_width="120sp"
-                    android:layout_height="60sp"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:textColor="@color/datacolor"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="mmHg"
-                    android:textColor="@color/duckgrey"
-                    android:textSize="20dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:id="@+id/lp_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/light_blue" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/dia"
-                    android:textColor="@color/duckgrey"
-                    android:textSize="20dp" />
-
-                <EditText
-                    android:id="@+id/lp"
-                    android:layout_width="120sp"
-                    android:layout_height="60sp"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:textColor="@color/datacolor"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="mmHg"
-                    android:textColor="@color/duckgrey"
-                    android:textSize="20dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:id="@+id/pulse_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/light_blue" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="@string/pulse"
-                    android:textColor="@color/duckgrey"
-                    android:textSize="20dp" />
-
-                <EditText
-                    android:id="@+id/mb"
-                    android:layout_width="120sp"
-                    android:layout_height="wrap_content"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:textColor="@color/datacolor"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="次/分"
-                    android:textColor="@color/duckgrey"
-                    android:textSize="20dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:id="@+id/bo_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/light_blue" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="血氧"
-                    android:textColor="@color/duckgrey"
-                    android:textSize="20dp" />
-
-                <EditText
-                    android:id="@+id/bo"
-                    android:layout_width="120sp"
-                    android:layout_height="60sp"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:textColor="@color/datacolor"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="%"
-                    android:textColor="@color/duckgrey"
-                    android:textSize="20dp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal" >
-
-                <ImageView
-                    android:id="@+id/temp_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/light_blue" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="20dp"
-                    android:text="体温"
-                    android:textColor="@color/duckgrey"
-                    android:textSize="20dp" />
-
-                <EditText
-                    android:id="@+id/temp"
-                    android:layout_width="120sp"
-                    android:layout_height="60sp"
-                    android:clickable="false"
-                    android:cursorVisible="false"
-                    android:focusable="false"
-                    android:focusableInTouchMode="false"
-                    android:textColor="@color/datacolor"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="℃"
-                    android:textColor="@color/duckgrey"
-                    android:textSize="20dp" />
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/bo_image_view"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/cont_bg03" >
-        </LinearLayout>
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:background="@drawable/centerbg"
+            
+            android:orientation="horizontal"
+            android:padding="5dp" >
 
-    <LinearLayout
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/cont_bg03"
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/hp_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/light_blue" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/sys"
+                        android:textColor="@color/duckgrey"
+                        android:textSize="@dimen/text_size_1" />
+
+                    <EditText
+                        android:id="@+id/hp"
+                        android:layout_width="120sp"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:textColor="@color/datacolor"
+                        android:textSize="@dimen/text_size_1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="mmHg"
+                        android:textColor="@color/duckgrey"
+                        android:textSize="@dimen/text_size_1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/lp_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/light_blue" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/dia"
+                        android:textColor="@color/duckgrey"
+                        android:textSize="@dimen/text_size_1" />
+
+                    <EditText
+                        android:id="@+id/lp"
+                        android:layout_width="120sp"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:textColor="@color/datacolor"
+                        android:textSize="@dimen/text_size_1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="mmHg"
+                        android:textColor="@color/duckgrey"
+                        android:textSize="@dimen/text_size_1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/pulse_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/light_blue" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/text_size_1"
+                        android:text="@string/pulse"
+                        android:textColor="@color/duckgrey"
+                        android:textSize="@dimen/text_size_1" />
+
+                    <EditText
+                        android:id="@+id/mb"
+                        android:layout_width="120sp"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:textColor="@color/datacolor"
+                        android:textSize="@dimen/text_size_1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="次/分"
+                        android:textColor="@color/duckgrey"
+                        android:textSize="@dimen/text_size_1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/bo_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/light_blue" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/text_size_1"
+                        android:text="血氧"
+                        android:textColor="@color/duckgrey"
+                        android:textSize="@dimen/text_size_1" />
+
+                    <EditText
+                        android:id="@+id/bo"
+                        android:layout_width="120sp"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:textColor="@color/datacolor"
+                        android:textSize="@dimen/text_size_1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="%"
+                        android:textColor="@color/duckgrey"
+                        android:textSize="@dimen/text_size_1" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <ImageView
+                        android:id="@+id/temp_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:src="@drawable/light_blue" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/text_size_1"
+                        android:text="体温"
+                        android:textColor="@color/duckgrey"
+                        android:textSize="@dimen/text_size_1" />
+
+                    <EditText
+                        android:id="@+id/temp"
+                        android:layout_width="120sp"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:cursorVisible="false"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
+                        android:textColor="@color/datacolor"
+                        android:textSize="@dimen/text_size_1" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="℃"
+                        android:textColor="@color/duckgrey"
+                        android:textSize="@dimen/text_size_1" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/bo_image_view"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@drawable/cont_bg03" >
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <RelativeLayout
         android:id="@+id/botton_layout"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/bottombar"
         android:background="@drawable/cont_bg03"
-        android:padding="5dp" >
+        android:padding="2dp" >
 
-        <LinearLayout
-            android:layout_width="fill_parent"
+        <TableLayout
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/find_device"
             android:background="@drawable/cont_bg03"
-            android:orientation="horizontal" >
+            android:stretchColumns="*" >
 
-            <Button
-                android:id="@+id/getdata"
-                android:layout_width="wrap_content"
+            <TableRow
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="@string/start_measurement"
-                android:textSize="20dp" />
-
-            <Button
-                android:id="@+id/bo_stable_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="30dp"
-                android:text="锁定血氧值"
-                android:textSize="20dp" />
-
-            <Button
-                android:id="@+id/temp_stable_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="30dp"
-                android:text="锁定温度"
-                android:textSize="20dp" />
-
-            <RelativeLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content" >
+                android:layout_weight="1" >
 
                 <Button
-                    android:id="@+id/find_device"
+                    android:id="@+id/getdata"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:background="@drawable/finddevice_button_bg"
-                    android:textSize="20dp" />
-            </RelativeLayout>
-        </LinearLayout>
-    </LinearLayout>
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/start_measurement"
+                    android:textSize="@dimen/text_size_1" />
+
+                <Button
+                    android:id="@+id/bo_stable_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="30dp"
+                    android:text="锁定血氧值"
+                    android:textSize="@dimen/text_size_1" />
+
+                <Button
+                    android:id="@+id/temp_stable_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="30dp"
+                    android:text="锁定温度"
+                    android:textSize="@dimen/text_size_1" />
+            </TableRow>
+        </TableLayout>
+
+        <Button
+            android:id="@+id/find_device"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/finddevice_button_bg"
+            android:textSize="@dimen/text_size_1" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/bottombar"
         android:layout_width="fill_parent"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/bottombar_height"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bottombg" >
 

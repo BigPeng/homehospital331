@@ -33,7 +33,7 @@ public class Tables {
 	public static final String SG = "sg";
 	public static final String KET = "ket";
 	public static final String BIL = "bil";
-	public static final String UGLU = "uglu";
+	public static final String UGLU = "glu";
 	public static final String VC = "vc";
 
 	public Map<String, String> pulseTable() {

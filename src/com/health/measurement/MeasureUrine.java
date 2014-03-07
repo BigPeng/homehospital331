@@ -372,7 +372,7 @@ public class MeasureUrine extends BaseActivity {
 				&& bluetoothService.getState() == BluetoothService.STATE_CONNECTED) {
 			status = View.VISIBLE;// 连接时设置可见
 		} else {
-			status = View.GONE;// 未连接时设置不可见
+			status = View.INVISIBLE;// 未连接时设置不可见
 		}
 		getDataButton.setVisibility(status);
 	}

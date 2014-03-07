@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
-        <item
-                android:state_pressed="true"
-                android:drawable="@drawable/test_handinputafterpress" />
-        <item
-                android:state_focused="true"
-                android:drawable="@drawable/test_handinputafterpress" />
-        <item
-                android:drawable="@drawable/test_handinputbeforepress" />
+
+    <!-- 按钮可用，并且处于按下状态时显示这个状态 -->
+    <item android:drawable="@drawable/test_handinputafterpress" android:state_enabled="true" android:state_pressed="true"/>
+    <!-- 按钮可用，并且处于聚焦状态时显示这个状态 -->
+    <item android:drawable="@drawable/test_handinputafterpress" android:state_enabled="true" android:state_focused="true"/>
+    <!-- 被选中时显示这个状态 -->
+    <item android:drawable="@drawable/test_handinput_selected" android:state_selected="true"/>
+
+    <!-- 按钮可用，并且处于正常状态时显示这个状态 -->
+    <item android:drawable="@drawable/test_handinputbeforepress"/>
+
 </selector>

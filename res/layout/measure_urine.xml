@@ -8,7 +8,7 @@
     <RelativeLayout
         android:id="@+id/topbar"
         android:layout_width="fill_parent"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/topbar_height"
         android:background="@drawable/topbg" >
 
         <TextView
@@ -89,7 +89,7 @@
 
                     <EditText
                         android:id="@+id/leu"
-                        android:layout_width="100dp"
+                        android:layout_width="80dp"
                         android:layout_height="60dp"
                         android:clickable="false"
                         android:cursorVisible="false"
@@ -110,7 +110,7 @@
 
                     <EditText
                         android:id="@+id/nit"
-                        android:layout_width="100dp"
+                        android:layout_width="80dp"
                         android:layout_height="60dp"
                         android:clickable="false"
                         android:cursorVisible="false"
@@ -131,7 +131,7 @@
 
                     <EditText
                         android:id="@+id/ubg"
-                        android:layout_width="100dp"
+                        android:layout_width="80dp"
                         android:layout_height="60dp"
                         android:clickable="false"
                         android:cursorVisible="false"
@@ -152,7 +152,7 @@
 
                     <EditText
                         android:id="@+id/pro"
-                        android:layout_width="100dp"
+                        android:layout_width="80dp"
                         android:layout_height="60dp"
                         android:clickable="false"
                         android:cursorVisible="false"
@@ -187,7 +187,7 @@
 
                     <EditText
                         android:id="@+id/pH"
-                        android:layout_width="100dp"
+                        android:layout_width="80dp"
                         android:layout_height="60dp"
                         android:clickable="false"
                         android:cursorVisible="false"
@@ -208,7 +208,7 @@
 
                     <EditText
                         android:id="@+id/bld"
-                        android:layout_width="100dp"
+                        android:layout_width="80dp"
                         android:layout_height="60dp"
                         android:clickable="false"
                         android:cursorVisible="false"
@@ -229,7 +229,7 @@
 
                     <EditText
                         android:id="@+id/ket"
-                        android:layout_width="100dp"
+                        android:layout_width="80dp"
                         android:layout_height="60dp"
                         android:clickable="false"
                         android:cursorVisible="false"
@@ -250,7 +250,7 @@
 
                     <EditText
                         android:id="@+id/bil"
-                        android:layout_width="100dp"
+                        android:layout_width="80dp"
                         android:layout_height="60dp"
                         android:clickable="false"
                         android:cursorVisible="false"
@@ -285,7 +285,7 @@
 
                     <EditText
                         android:id="@+id/glu"
-                        android:layout_width="100dp"
+                        android:layout_width="80dp"
                         android:layout_height="60dp"
                         android:clickable="false"
                         android:cursorVisible="false"
@@ -306,7 +306,7 @@
 
                     <EditText
                         android:id="@+id/vc"
-                        android:layout_width="100dp"
+                        android:layout_width="80dp"
                         android:layout_height="60dp"
                         android:clickable="false"
                         android:cursorVisible="false"
@@ -327,7 +327,7 @@
 
                     <EditText
                         android:id="@+id/sg"
-                        android:layout_width="100dp"
+                        android:layout_width="80dp"
                         android:layout_height="60dp"
                         android:clickable="false"
                         android:cursorVisible="false"
@@ -339,11 +339,18 @@
                         android:textSize="20sp" />
 
                     <TextView
-                        android:layout_width="178dp"
+                        android:layout_width="78dp"
                         android:layout_height="wrap_content"
                         android:gravity="right"
                         android:textColor="#ff444444"
                         android:textSize="18sp" />
+
+                    <EditText
+                        android:id="@+id/bil"
+                        android:layout_width="80dp"
+                        android:layout_height="60dp"
+                        android:visibility="invisible"
+                        android:textSize="20sp" />
                 </TableRow>
 
                 <TableRow
@@ -369,7 +376,7 @@
                         android:focusable="false"
                         android:focusableInTouchMode="false"
                         android:gravity="center"
-                        android:hint=""                    
+                        android:hint=""
                         android:textColor="@color/datacolor"
                         android:textSize="20sp" />
                 </TableRow>
@@ -404,7 +411,7 @@
     <RelativeLayout
         android:id="@+id/bottombar"
         android:layout_width="fill_parent"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/bottombar_height"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bottombg" >
 

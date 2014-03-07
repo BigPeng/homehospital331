@@ -10,7 +10,13 @@
     <color name="dianji">#294262</color>
     <color name="duckgrey">#ff444444</color>
     <color name="datacolor">#0000FF</color>
-    <color name="latest_record_title">#EEB4B4</color>
+    <color name="record_title">#EEB4B4</color>
+    <color name="record_content">#F7F7F7</color>
     <color name="latest_uploaded">#D1EEEE</color>
+    <color name="c1">#C71585</color>
+    <color name="c2">#C6E2FF</color>
+    <color name="c3">#C67171</color>
+    <color name="c4">#C5C1AA</color>
+    <color name="c5">#C0FF3E</color>
 
 </resources>

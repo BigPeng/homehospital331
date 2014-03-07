@@ -1,115 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-   android:orientation="vertical"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:background="@drawable/background">
-
-  <LinearLayout
-      android:orientation="horizontal"
-      android:layout_width="fill_parent"
-      android:gravity="center_vertical"
-      android:background="@drawable/topbg"
-      android:layout_height="55dp">
-      <TextView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:textColor="#fffdfdfd"
-          android:textSize="24px"
-          android:text="@string/healthinformation_title"
-      />
-      
-      <TextView
-          android:layout_height="wrap_content"
-          android:layout_width="wrap_content"
-          android:textColor="#fffdfdfd"
-          android:textSize="24px"
-          android:paddingLeft="300dp"
-          android:id="@+id/healthinformation_user"
-      />
-
-    
-           
-      
-</LinearLayout>
- <LinearLayout
-    android:orientation="horizontal"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="375dp">
-  >    
-<LinearLayout
-  android:orientation="horizontal"
-  android:background="@drawable/centerbg"
-  android:layout_margin="5px"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent">
-  <LinearLayout
-       android:orientation="vertical"
-       android:layout_width="wrap_content"
-       android:gravity="center_horizontal"
-       android:background="@drawable/myhealth_healthreport_leftbackground"
-       android:layout_height="fill_parent">
-        
-        <ImageView
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:paddingTop="10dp"
-          android:src="@drawable/healthinformation_little"
-        />
-        <Button
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_gravity="center"
-           android:layout_marginTop="40dp"
-           android:layout_marginBottom="40dp"
-           android:textColor="#ff444444"
-           android:textSize="18px"
-           android:background="@drawable/healthinfo_changshibtn"
-           android:id="@+id/healthinfo_changshiBtn"/> 
+    android:layout_height="fill_parent"
+    android:background="@drawable/background" >
+
+    <LinearLayout
+        android:id="@+id/topbar"
+        android:layout_width="fill_parent"
+        android:layout_height="55dp"
+        android:background="@drawable/topbg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/healthinformation_title"
+            android:textColor="#fffdfdfd"
+            android:textSize="24px" />
+
+        <TextView
+            android:id="@+id/healthinformation_user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="300dp"
+            android:textColor="#fffdfdfd"
+            android:textSize="24px" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/bottombar"
+        android:layout_below="@+id/topbar"
+        android:orientation="horizontal" >
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_margin="5px"
+            android:background="@drawable/centerbg"
+            android:orientation="horizontal" >
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="fill_parent"
+                android:background="@drawable/myhealth_healthreport_leftbackground"
+                android:gravity="center_horizontal"
+                android:orientation="vertical" >
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingTop="10dp"
+                    android:src="@drawable/healthinformation_little" />
+
+                <Button
+                    android:id="@+id/healthinfo_changshiBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="40dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/healthinfo_changshibtn"
+                    android:textColor="#ff444444"
+                    android:textSize="18px" />
+
+                <Button
+                    android:id="@+id/healthinfo_bangbangBtn"
+                    android:layout_width="130dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="#ff444444"
+                    android:textSize="18px" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="5px"
+                android:background="@drawable/cont_bg03"
+                android:orientation="vertical" >
+
+                <ListView
+                    android:id="@+id/healthinfo_list"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:divider="@null"
+                    android:fadingEdge="none"
+                    android:scrollbars="none"
+                    android:transcriptMode="alwaysScroll" >
+                </ListView>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bottombar"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bottombg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:scrollbars="none" >
 
         <Button
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:layout_gravity="center"
-           android:textColor="#ff444444"
-           android:textSize="18px"
-           android:id="@+id/healthinfo_bangbangBtn"
-           />
-</LinearLayout>
-             <LinearLayout
-               android:orientation="vertical"
-               android:layout_width="fill_parent"
-               android:layout_height="fill_parent" 
-               android:layout_marginLeft="5px"    
-               android:background="@drawable/cont_bg03"> 
-          
-             <ListView
-               android:id="@+id/healthinfo_list" 
-               android:layout_height="fill_parent" 
-               android:layout_width="fill_parent" 
-               android:divider="@null" 
-               android:scrollbars="none"
-               android:fadingEdge="none"
-               android:transcriptMode="alwaysScroll" 
-               android:layout_weight="1">
-      </ListView> 
-               </LinearLayout></LinearLayout></LinearLayout>
-<LinearLayout
-  android:orientation="horizontal"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent"
-  android:background="@drawable/bottombg"
-  android:gravity="center_vertical"
-  android:scrollbars="none">
+            android:id="@+id/healthinfo_homebutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/all_homebtn"
+            android:gravity="center" >
+        </Button>
+    </LinearLayout>
 
-  <Button
-  android:layout_width="wrap_content"
-  android:layout_height="wrap_content"
-  android:background="@drawable/all_homebtn"
-  android:gravity="center"
-  android:id="@+id/healthinfo_homebutton"
-  
-  ></Button></LinearLayout>
-  
- 
- </LinearLayout>
+</RelativeLayout>

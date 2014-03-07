@@ -144,6 +144,10 @@ public class BeneCheck {
 		String date = String.format("%04d-%02d-%02d %02d:%02d:00",
 				2000 + data[12], data[13], data[14], data[15], data[16]);
 		int value = (data[17] & 0xff) + ((data[18] & 0xff) << 8);
+		byte token = getToken(data);
+		if (token == TOKEN_GLU_RECORD || token == TOKEN_UA_RECORD
+				|| token == TOKEN_CHOL_RECORD)
+			System.out.println(Arrays.toString(data));
 		return new Record(date, value);
 	}
 

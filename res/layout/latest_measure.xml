@@ -7,167 +7,54 @@
     <RelativeLayout
         android:id="@+id/topbar"
         android:layout_width="fill_parent"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/topbar_height"
         android:layout_alignParentTop="true"
-        android:background="@drawable/topbg" >
+        android:background="@drawable/topbg"
+        android:gravity="center" >
 
-        <LinearLayout
-            android:layout_width="fill_parent"
-            android:layout_height="55dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="10dp"
+            android:src="@drawable/logo" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:src="@drawable/logo" />
-        </LinearLayout>
+        <Button
+            android:id="@+id/refresh_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/main_freshbtn" />
     </RelativeLayout>
 
-    <ScrollView
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_above="@+id/bottombar"
         android:layout_below="@+id/topbar"
-        android:layout_margin="20dp"
-        android:fillViewport="true" >
+        android:background="@drawable/cont_bg03"
+        android:padding="10dp" >
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/latest_record_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:text="最近测量记录"
+            android:textColor="@color/duckgrey"
+            android:textSize="@dimen/text_size_2" />
+
+        <ListView
+            android:id="@+id/latest_record"
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:background="@drawable/cont_bg03"
-            android:padding="10dp" >
-
-            <TextView
-                android:id="@+id/latest_bp_pulse_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:text="血压与脉率"
-                android:textColor="@color/duckgrey"
-                android:textSize="30sp" />
-
-            <ListView
-                android:id="@+id/latest_bp_pulse"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/latest_bp_pulse_title"
-                android:background="@drawable/cont_bg03" />
-
-            <TextView
-                android:id="@+id/latest_temp_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/latest_bp_pulse"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:text="体温"
-                android:textColor="@color/duckgrey"
-                android:textSize="30sp" />
-
-            <ListView
-                android:id="@+id/latest_temp"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/latest_temp_title"
-                android:background="@drawable/cont_bg03" />
-
-            <TextView
-                android:id="@+id/latest_bo_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/latest_temp"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:text="血氧"
-                android:textColor="@color/duckgrey"
-                android:textSize="30sp" />
-
-            <ListView
-                android:id="@+id/latest_bo"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/latest_bo_title"
-                android:background="@drawable/cont_bg03" />
-
-            <TextView
-                android:id="@+id/latest_glu_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/latest_bo"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:text="葡萄糖"
-                android:textColor="@color/duckgrey"
-                android:textSize="30sp" />
-
-            <ListView
-                android:id="@+id/latest_glu"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/latest_glu_title"
-                android:background="@drawable/cont_bg03" />
-
-            <TextView
-                android:id="@+id/latest_ua_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/latest_glu"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:text="尿酸"
-                android:textColor="@color/duckgrey"
-                android:textSize="30sp" />
-
-            <ListView
-                android:id="@+id/latest_ua"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/latest_ua_title"
-                android:background="@drawable/cont_bg03" />
-
-            <TextView
-                android:id="@+id/latest_chol_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/latest_ua"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:text="总胆固醇"
-                android:textColor="@color/duckgrey"
-                android:textSize="30sp" />
-
-            <ListView
-                android:id="@+id/latest_chol"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/latest_chol_title"
-                android:background="@drawable/cont_bg03" />
-            <TextView
-                android:id="@+id/latest_urine_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/latest_chol"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
-                android:text="尿液分析 "
-                android:textColor="@color/duckgrey"
-                android:textSize="30sp" />
-
-            <ListView
-                android:id="@+id/latest_urine"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/latest_urine_title"
-                android:background="@drawable/cont_bg03" />
-        </RelativeLayout>
-    </ScrollView>
+            android:layout_height="wrap_content"
+            android:layout_below="@id/latest_record_title"
+            android:background="@drawable/cont_bg03" />
+    </RelativeLayout>
 
     <RelativeLayout
         android:id="@+id/bottombar"
         android:layout_width="fill_parent"
-        android:layout_height="100dp"
+        android:layout_height="@dimen/bottombar_height"
         android:layout_alignParentBottom="true"
         android:background="@drawable/bottombg" >
 

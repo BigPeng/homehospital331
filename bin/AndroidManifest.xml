@@ -66,6 +66,10 @@
             android:label="最近测量记录" >
         </activity>
         <activity
+            android:name="com.health.myhealth.UrineChart"
+            android:label="最近测量记录" >
+        </activity>
+        <activity
             android:name="com.health.measurement.Measurement"
             android:label="进行测试" >
         </activity>
@@ -92,6 +96,14 @@
         <activity
             android:name="com.health.myhealth.DataGraph"
             android:label="测试记录" >
+        </activity>
+        <activity
+            android:name="com.health.myhealth.TableRecord"
+            android:label="所有记录" >
+        </activity>
+        <activity
+            android:name="com.health.myhealth.CurveRecord"
+            android:label="所有记录" >
         </activity>
         <activity
             android:name=".test_xueya"
@@ -171,7 +183,7 @@
             android:label="体检日程" >
         </activity>
         <activity
-            android:name=".test_handinput"
+            android:name="com.health.measurement.HandInputMeasure"
             android:label="手写输入" >
         </activity>
         <activity
@@ -201,8 +213,7 @@
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" >
-    </uses-permission>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.CALL_PHONE" />

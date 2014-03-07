@@ -50,8 +50,7 @@ public class teleference extends BaseActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.teleference);
-		DigitalClock mDigitalClock = (DigitalClock) findViewById(R.id.teleference_digitalclock);
-
+		
 		Bundle extra = getIntent().getExtras();
 		if (extra != null) {
 			userid = extra.getInt("userid");

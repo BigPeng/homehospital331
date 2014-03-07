@@ -9,7 +9,9 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import cn.younext.R;
@@ -17,8 +19,7 @@ import cn.younext.R;
 import com.health.BaseActivity;
 import com.health.database.Cache;
 import com.health.database.Tables;
-import com.health.util.BigListAdapter;
-import com.health.util.MyListAdapter;
+import com.health.util.LatestRecordAdapter;
 import com.health.web.WebService;
 
 /**
@@ -30,136 +31,202 @@ import com.health.web.WebService;
  */
 public class LatestMeasure extends BaseActivity {
 	private static Context context;
-	private MyListAdapter[] myAdapter = new MyListAdapter[6];
-	private BigListAdapter urineAdapter;
-	private ListView[] listview = new ListView[7];
-	private List<List<String[]>> datas = new ArrayList<List<String[]>>();
-	private List<List<Boolean>> isTitles = new ArrayList<List<Boolean>>();
-	private static final String[] EMPTY = { "", "", "", "", WebService.UPLOADED };
+	private LatestRecordAdapter myAdapter;
+	private ListView listview;
+	private List<String[]> datas = new ArrayList<String[]>();
+	private List<JSONObject> jsonDatas = new ArrayList<JSONObject>();
+	private final static String[] titles = { "测量时间", "项目", "测量值", "参考值", "状态" };
+	Button refreshButton;
+	Button homeButton;
+	Button backButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.latest_measure);
-		context = this;
-		cache = new Cache(context);
-		listview[0] = (ListView) this.findViewById(R.id.latest_bp_pulse);
-		listview[1] = (ListView) this.findViewById(R.id.latest_temp);
-		listview[2] = (ListView) this.findViewById(R.id.latest_bo);
-		listview[3] = (ListView) this.findViewById(R.id.latest_glu);
-		listview[4] = (ListView) this.findViewById(R.id.latest_ua);
-		listview[5] = (ListView) this.findViewById(R.id.latest_chol);
-		listview[6] = (ListView) this.findViewById(R.id.latest_urine);
+		context = this;	
+		setButtons();
+
+		listview = (ListView) this.findViewById(R.id.latest_record);
 		generateData();
-		for (int i = 0; i < 6; i++) {
-
-			myAdapter[i] = new MyListAdapter(context, datas.get(i),
-					isTitles.get(i), 5);
-			listview[i].setAdapter(myAdapter[i]);
-			setListViewHeight(listview[i]);
-		}
-		urineAdapter = new BigListAdapter(context, datas.get(6),
-				isTitles.get(6), 13);
-		listview[6].setAdapter(urineAdapter);
-		setListViewHeight(listview[6]);
-
+		myAdapter = new LatestRecordAdapter(context, datas, jsonDatas);
+		listview.setAdapter(myAdapter);
 	}
 
+	private void setButtons() {
+		refreshButton = (Button) this.findViewById(R.id.refresh_button);
+		homeButton = (Button) this.findViewById(R.id.to_home_button);
+		backButton = (Button) this.findViewById(R.id.return_button);
+		OnClickListener listener = new View.OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				if (v == refreshButton) {
+					// 清除上次加载的数据
+					clearDataset();
+					// 刷新重新加载数据
+					generateData();
+					myAdapter.notifyDataSetChanged();
+				} else if (v == homeButton) {
+					LatestMeasure.this.setResult(RESULT_OK);
+					LatestMeasure.this.finish();
+				} else if (v == backButton) {
+					LatestMeasure.this.finish();
+				}
+			}
+		};
+		refreshButton.setOnClickListener(listener);
+		homeButton.setOnClickListener(listener);
+		backButton.setOnClickListener(listener);
+	}
+
+	private void clearDataset() {
+		datas.clear();
+		jsonDatas.clear();
+	}
+
+	/***
+	 * 构造listview显示的数据
+	 */
 	private void generateData() {
-		String[] title = new String[] { "测量时间", "收缩压", "舒张压", "脉率", "状态" };
-		String[] record = getBpPulse();
-		add(title, record);
-		title = new String[] { "测量时间", " ", "体温", " ", "状态" };
-		record = getFromCache(Cache.TEMP, Tables.TEMP);
-		add(title, record);
-		title = new String[] { "测量时间", " ", "血氧", " ", "状态" };
-		record = getFromCache(Cache.BO, Tables.BO);
-		add(title, record);
-		title = new String[] { "测量时间", " ", "葡萄糖", " ", "状态" };
-		record = getFromCache(Cache.GLU, Tables.GLU);
-		add(title, record);
-		title = new String[] { "测量时间", " ", "尿酸", " ", "状态" };
-		record = getFromCache(Cache.UA, Tables.UA);
-		add(title, record);
-		title = new String[] { "测量时间", " ", "总胆固醇", " ", "状态" };
-		record = getFromCache(Cache.CHOL, Tables.CHOL);
-		add(title, record);
-		title = new String[] { "测量时间", "白细胞", "亚硝酸盐", "尿胆原", "蛋白质", "pH值",
-				"潜血", "比重", "酮体", "胆红素", "葡萄糖", "维生素C", "状态" };
-		record = getUrine();
-		add(title, record);
-	}
+		datas.add(titles);
 
-	private String[] getUrine() {
-		String[] empty = { "2013-11-28 11:12:58", "1", "2", "3", "4", "1", "2",
-				"3", "4", "1", "2", "3", "未上传" };
-		try {
-			JSONObject json = cache.getItem(Cache.URINE);
-			if (json == null)
-				return empty;
-			return new String[] { json.getString(Tables.TIME),
-					json.getString(Tables.LEU), json.getString(Tables.NIT),
-					json.getString(Tables.UBG), json.getString(Tables.PRO),
-					json.getString(Tables.PH), json.getString(Tables.BLD),
-					json.getString(Tables.SG), json.getString(Tables.KET),
-					json.getString(Tables.BIL), json.getString(Tables.UGLU),
-					json.getString(Tables.VC),
-					json.getString(WebService.STATUS),
-					json.getString(Tables.DEVICENAME),
-					json.getString(Tables.DEVICENAME) };
-		} catch (JSONException e) {
-			e.printStackTrace();
-			return empty;
+		String[] bp = getBp();
+		if (bp != null) {
+			datas.add(bp);
+
 		}
-	}
+		String[] pulse = getFromCache(Cache.BP, Tables.PULSE, "脉率(bpm)",
+				"[60,100)", WebService.PATH_BP);
+		if (pulse != null) {
+			datas.add(pulse);
 
-	private String[] getFromCache(String item, String attr) {
-		try {
-			JSONObject json = cache.getItem(item);
-			if (json == null)
-				return EMPTY;
-			return new String[] { json.getString(Tables.TIME), "",
-					json.getString(attr), "",
-					json.getString(WebService.STATUS),
-					json.getString(Tables.DEVICENAME),
-					json.getString(Tables.DEVICENAME) };
-		} catch (JSONException e) {
-			e.printStackTrace();
-			return EMPTY;
 		}
-	}
+		String[] temp = getFromCache(Cache.TEMP, Tables.TEMP, "体温(℃)",
+				"36.2-37.5", WebService.PATH_TEMP);
+		if (temp != null) {
+			datas.add(temp);
 
-	private void add(String[] title, String[] content) {
-		List<String[]> dataContent = new ArrayList<String[]>();
-		List<Boolean> isTitle = new ArrayList<Boolean>();
-		dataContent.add(title);
-		isTitle.add(true);
-		dataContent.add(content);
-		isTitle.add(false);
-		datas.add(dataContent);
-		isTitles.add(isTitle);
+		}
+		String[] bo = getFromCache(Cache.BO, Tables.BO, "血氧(%)", "[95%,100%]",
+				WebService.PATH_BO);
+		if (bo != null) {
+			datas.add(bo);
 
+		}
+		String[] glu = getFromCache(Cache.GLU, Tables.GLU, "血糖(mg/dL)",
+				"餐前:[70,130),餐后：[100,180)", WebService.PATH_GLU);
+		if (glu != null) {
+			datas.add(glu);
+
+		}
+		String[] ua = getFromCache(Cache.UA, Tables.UA, "尿酸(mg/d)",
+				"儿童[2.5-5.5],男性[3.4-7.0],女性[2.4-6.0]", WebService.PATH_UA);
+		if (ua != null) {
+			datas.add(ua);
+
+		}
+		String[] chol = getFromCache(Cache.CHOL, Tables.CHOL, "总胆固醇(mg/d)",
+				"<200", WebService.PATH_CHOL);
+		if (chol != null) {
+			datas.add(chol);
+
+		}
+		String[] urine = getUrine();
+		if (urine != null) {
+			datas.add(urine);
+
+		}
 	}
 
 	/**
-	 * 从缓存中获取血压和脉率值
+	 * 获取尿液分析11项
 	 * 
 	 * @return
 	 */
-	private String[] getBpPulse() {
+
+	private String[] getUrine() {
+		String[] itemName = { getString(R.string.leu), getString(R.string.bld),
+				getString(R.string.ph), getString(R.string.pro),
+				getString(R.string.ubg), getString(R.string.nit),
+				getString(R.string.sg), getString(R.string.ket),
+				getString(R.string.bil), getString(R.string.glu),
+				getString(R.string.vc) };
+		String[] itemTag = { Tables.LEU, Tables.BLD, Tables.PH, Tables.PRO,
+				Tables.UBG, Tables.NIT, Tables.SG, Tables.KET, Tables.BIL,
+				Tables.UGLU, Tables.VC };
+		try {
+			JSONObject json = cache.getItem(Cache.URINE);
+			StringBuilder builder = new StringBuilder();
+			for (int i = 0; i < itemName.length; i++) {
+				builder.append(itemName[i]);
+				builder.append(":");
+				builder.append(json.getString(itemTag[i]));
+				builder.append(",");
+			}
+			builder.deleteCharAt(builder.length() - 1);
+			json.put(Cache.ITEM, Cache.URINE);// 添加item,在二次上传中使用到
+			json.put(WebService.PATH, WebService.PATH_URINE);// 添加上传路径
+			jsonDatas.add(json);
+			return new String[] { json.getString(Tables.TIME), "尿液分析",
+					builder.toString(), "/", json.getString(WebService.STATUS) };
+		} catch (Exception e) {
+			return null;
+
+		}
+	}
+
+	/***
+	 * 获取血压两项
+	 * 
+	 * @return
+	 * @throws JSONException
+	 */
+	private String[] getBp() {
 		try {
 			JSONObject json = cache.getItem(Cache.BP);
-			if (json == null)
-				return EMPTY;
-			return new String[] { json.getString(Tables.TIME),
-					json.getString(Tables.SBP), json.getString(Tables.DBP),
-					json.getString(Tables.DBP),
-					json.getString(WebService.STATUS),
-					json.getString(Tables.DEVICENAME),
-					json.getString(Tables.DEVICENAME) };
-		} catch (JSONException e) {
+			json.put(Cache.ITEM, Cache.BP);// 添加item,在二次上传中使用到
+			json.put(WebService.PATH, WebService.PATH_BP);// 添加上传路径
+			jsonDatas.add(json);
+			return new String[] {
+					json.getString(Tables.TIME),
+					"血压(mmHg)",
+					"收缩压：" + json.getString(Tables.SBP) + "舒张压："
+							+ json.getString(Tables.DBP),
+					"收缩压:[90,140)/舒张压:[60,90)",
+					json.getString(WebService.STATUS) };
+		} catch (Exception e) {
+			return null;
+		}
+
+	}
+
+	/***
+	 * 从缓存中获取最近的记录
+	 * 
+	 * @param item
+	 *            项目标志
+	 * @param attr
+	 *            属性标志
+	 * @param itemName项目名
+	 * @param stand
+	 *            参考标准
+	 * @upUrl path 上传的url路径后缀
+	 * @return
+	 */
+	private String[] getFromCache(String item, String attr, String itemName,
+			String stand, String path) {
+		try {
+			JSONObject json = cache.getItem(item);
+			json.put(Cache.ITEM, item);// 添加item,在二次上传中使用到
+			json.put(WebService.PATH, path);// 添加上传路径
+			jsonDatas.add(json);
+			return new String[] { json.getString(Tables.TIME), itemName,
+					json.getString(attr), stand,
+					json.getString(WebService.STATUS) };
+		} catch (Exception e) {
 			e.printStackTrace();
-			return EMPTY;
+			return null;
 		}
 	}
 
@@ -170,7 +237,8 @@ public class LatestMeasure extends BaseActivity {
 	 *            listview
 	 * 
 	 */
-	public static void setListViewHeight(ListView listview) {
+	@SuppressWarnings("unused")
+	private static void setListViewHeight(ListView listview) {
 		int totalHeight = 0;
 		ListAdapter adapter = listview.getAdapter();
 		if (null != adapter) {
@@ -181,7 +249,6 @@ public class LatestMeasure extends BaseActivity {
 					totalHeight += listItem.getMeasuredHeight();
 				}
 			}
-
 			ViewGroup.LayoutParams params = listview.getLayoutParams();
 			params.height = totalHeight
 					+ (listview.getDividerHeight() * (listview.getCount() - 1));

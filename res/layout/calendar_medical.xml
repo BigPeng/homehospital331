@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@drawable/background"
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/topbar"
         android:layout_width="fill_parent"
         android:layout_height="55dp"
         android:background="@drawable/topbg"
@@ -26,14 +27,13 @@
             android:paddingLeft="300dp"
             android:textColor="#fffdfdfd"
             android:textSize="24px" />
-
-      
-        
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="375dp"
+        android:layout_height="fill_parent"
+        android:layout_above="@+id/bottombar"
+        android:layout_below="@+id/topbar"
         android:orientation="horizontal" >
 
         <LinearLayout
@@ -347,8 +347,10 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/bottombar"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/bottombg"
         android:gravity="center_vertical"
         android:orientation="horizontal"
@@ -363,4 +365,4 @@
         </Button>
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

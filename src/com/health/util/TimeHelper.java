@@ -23,7 +23,6 @@ public class TimeHelper {
 		return new Date();
 	}
 
-	
 	/***
 	 * 求beforeDays前的格式化日期
 	 * 
@@ -39,5 +38,15 @@ public class TimeHelper {
 
 	public static long parseTime(String stime) throws ParseException {
 		return formater.parse(stime).getTime();
+	}
+
+	/***
+	 * 长整型时间转化为字符串格式
+	 * 
+	 * @param lTime
+	 * @return
+	 */
+	public static String getStringTime(long lTime) {
+		return formater.format(new Date(lTime)).toString();
 	}
 }

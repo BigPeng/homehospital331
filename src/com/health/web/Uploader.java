@@ -20,7 +20,7 @@ public class Uploader implements Runnable {
 	public static final String STUTAS = "data";
 	public static final int OK = 0;
 	public static final int FAILURE = 1;// 失败
-	public static final int NET_ERROR = 1;// 网络异常
+	public static final int NET_ERROR = 2;// 网络异常
 	private Map<String, String> dataMap;
 	private String path;
 	private String item;
@@ -48,9 +48,8 @@ public class Uploader implements Runnable {
 		bundle.putString(Cache.ITEM, item);
 		cache.saveItem(item, dataMap);// 保存单项测量值
 		dataMap.remove(WebService.STATUS);// 删除上传状态
-		dataMap.put(WebService.PATH, path);
-		Map<String, String> newMap = WebService.UrlEncode(dataMap);
-		JSONObject json = new JSONObject(newMap);
+		dataMap.put(WebService.PATH, path);		
+		JSONObject json = new JSONObject(dataMap);
 		JSONObject resultJson;
 		int status;
 		try {
@@ -64,10 +63,7 @@ public class Uploader implements Runnable {
 				cache.saveItem(item, dataMap);
 				status = OK;
 			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			status = NET_ERROR;
-		} catch (JSONException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			status = NET_ERROR;
 		}

@@ -8,6 +8,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.json.JSONException;
@@ -17,7 +18,9 @@ import android.util.Log;
 
 public class WebService {
 
-	private static final String DOMAIN = "http://pat.uuhealth.com.cn/pat/index/";
+	// private static final String DOMAIN =
+	// "http://pat.uuhealth.com.cn/pat/index/";
+	private static final String DOMAIN = "http://www.itonehealth.com/pat/index/";
 
 	public static final String STATUS = "status";// 上传状态
 	public static final String UPLOADED = "已上传";// 已经上传
@@ -55,7 +58,6 @@ public class WebService {
 	public static final String CHECKTIME = "checkTime";
 	public static final String DATA = "data";
 	private static final String TAG = "WebService";
-	
 
 	private static JSONObject upload(JSONObject json, String url)
 			throws JSONException, IOException {
@@ -77,6 +79,7 @@ public class WebService {
 		try {
 			String url = DOMAIN + json.getString(PATH);
 			json.remove(PATH);
+			json = encodeUrl(json);
 			return upload(json, url);
 		} catch (JSONException e) {
 			e.printStackTrace();
@@ -172,21 +175,50 @@ public class WebService {
 	 * @param json
 	 * @return
 	 * @throws JSONException
-	 * @throws IOException 
+	 * @throws IOException
 	 */
-	public static JSONObject query(String queryPath, Map<String,String> paras)
+	public static JSONObject query(String queryPath, Map<String, String> paras)
 			throws JSONException, IOException {
 		paras.put(PLAT_ID_KEY, PLAT_ID_VALUE);
-		paras.put(PAGECOUNT, "50");
-		paras.put(PAGEINDEX, "0");
-		paras = UrlEncode(paras);
+		// 如果没有指定页面大小,设定一个默认值
+		if (!paras.containsKey(PAGECOUNT))
+			paras.put(PAGECOUNT, "20");
+		// 默认为第一页
+		if (!paras.containsKey(PAGEINDEX))
+			paras.put(PAGEINDEX, "0");
+		paras = encodeUrl(paras);
 		JSONObject result = null;
-		String url = DOMAIN + queryPath + "?" + new JSONObject(paras).toString();
+		String url = DOMAIN + queryPath + "?"
+				+ new JSONObject(paras).toString();
 		result = httpConenction(url);
 		return result;
 	}
 
-	public  static Map<String, String> UrlEncode(Map<String, String> dataMap) {
+	/***
+	 * 对空格和加号进行编码，否则url包含空格会报错
+	 * 
+	 * @param json
+	 * @return
+	 * @throws JSONException
+	 */
+	public static JSONObject encodeUrl(JSONObject json) throws JSONException {
+		JSONObject newJson = new JSONObject();
+		final String space = " ";
+		final String plus = "+";
+		Iterator<String> iter = json.keys();
+		while (iter.hasNext()) {
+			String key = iter.next();
+			String value = json.getString(key);
+			if (key.contains(space) || key.contains(plus))
+				key = URLEncoder.encode(key);
+			if (value.contains(space) || value.contains(plus))
+				value = URLEncoder.encode(value);
+			newJson.put(key, value);
+		}
+		return newJson;
+	}
+
+	private static Map<String, String> encodeUrl(Map<String, String> dataMap) {
 		final String space = " ";
 		Map<String, String> newMap = new HashMap<String, String>();
 		for (Map.Entry<String, String> entry : dataMap.entrySet()) {

@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background"
     android:orientation="vertical" >
 
     <LinearLayout
+        android:id="@+id/top_bar"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/topbar_height"
         android:background="@drawable/topbg"
         android:gravity="center_vertical"
         android:orientation="horizontal" >
@@ -45,74 +46,76 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </LinearLayout>
-
-        <cn.younext.DigitalClock
-            android:id="@+id/digitalclock"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:paddingRight="10dp"
-            android:textColor="#fffdfdfd"
-            android:textSize="24sp" />
     </LinearLayout>
 
-    <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_margin="5dp"
-        android:layout_weight="1"
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/bottom_bar"
+        android:layout_below="@+id/top_bar"
         android:background="@drawable/centerbg"
+        android:gravity="center"
+        android:orientation="vertical"
         android:paddingBottom="20dp"
         android:paddingTop="20dp" >
 
-        <TableRow
-            android:layout_weight="1"
-            android:gravity="center" >
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
 
             <Button
                 android:id="@+id/main_myhealthid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
                 android:background="@drawable/main_myhealthxml" />
 
             <Button
                 android:id="@+id/main_testid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="90dp"
-                android:layout_marginRight="90dp"
+                android:layout_centerHorizontal="true"
                 android:background="@drawable/main_testxml" />
 
             <Button
                 android:id="@+id/main_teleferenceid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
                 android:background="@drawable/main_teleferencexml" />
-        </TableRow>
+        </RelativeLayout>
 
-        <TableRow
-            android:layout_weight="1"
-            android:gravity="center" >
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" >
 
             <Button
                 android:id="@+id/main_calendarid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_toLeftOf="@+id/center_helper"
                 android:background="@drawable/main_calendarxml" />
+
+            <TextView
+                android:id="@+id/center_helper"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true" />
 
             <Button
                 android:id="@+id/main_healthinformationid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="90dp"
-                android:layout_marginRight="90dp"
+                android:layout_toRightOf="@+id/center_helper"
                 android:background="@drawable/main_healthinformationxml" />
-        </TableRow>
-    </TableLayout>
+        </RelativeLayout>
+    </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/bottom_bar"
         android:layout_width="match_parent"
-        android:layout_height="55dp"
+        android:layout_height="@dimen/bottombar_height"
+        android:layout_alignParentBottom="true"
         android:background="@drawable/bottombg"
         android:orientation="horizontal" >
 
@@ -130,4 +133,4 @@
         </LinearLayout>
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

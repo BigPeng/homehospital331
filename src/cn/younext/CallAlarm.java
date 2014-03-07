@@ -16,7 +16,6 @@ public class CallAlarm extends BroadcastReceiver{
         {
         	text=extra.getString("text");
         	tishi=extra.getString("tishi");
-
         }
 
 		Intent i = new Intent(context, AlarmAlert.class);

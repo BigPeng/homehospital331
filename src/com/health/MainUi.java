@@ -20,6 +20,7 @@ import cn.younext.calendar_medical;
 import cn.younext.healthinformation;
 import cn.younext.healthreport_alarm;
 import cn.younext.teleference;
+import android.app.Activity;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.content.Intent;
@@ -33,6 +34,7 @@ import android.widget.Button;
 import android.widget.SimpleCursorAdapter;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.view.View.OnClickListener;
 
 public class MainUi extends BaseActivity {
@@ -211,11 +213,17 @@ public class MainUi extends BaseActivity {
 		Log.v("main", "main set alarm");
 	}
 
+	@Override
+	public void onStart() {
+		super.onStart();
+		setSinppner();
+	}
+
 	private void setSinppner() {
 		String[] spinnerTitle = { userName, "切换用户" };
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
 				android.R.layout.simple_spinner_item, spinnerTitle);
-		
+
 		// 设置下拉列表风格
 		adapter.setDropDownViewResource(R.layout.main_spinner_dropdown);
 		spinner.setAdapter(adapter);
@@ -244,14 +252,21 @@ public class MainUi extends BaseActivity {
 
 	}
 
+	private long exitTime = 0;
+
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		// TODO Auto-generated method stub
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			BluetoothService.close();// 关闭蓝牙
-			System.exit(0);
+		if (keyCode == KeyEvent.KEYCODE_BACK
+				&& event.getAction() == KeyEvent.ACTION_DOWN) {
+			if ((System.currentTimeMillis() - exitTime) > 2000) {
+				Toast.makeText(getApplicationContext(), "再按一次退出！",
+						Toast.LENGTH_SHORT).show();
+				exitTime = System.currentTimeMillis();
+			} else {
+				BluetoothService.close();// 关闭蓝牙
+				System.exit(0);
+			}
 			return true;
-
 		}
 		return super.onKeyDown(keyCode, event);
 	}

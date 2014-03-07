@@ -10,7 +10,6 @@ import com.health.database.Cache;
 
 public class BaseActivity extends Activity {
 	private Context context;
-
 	protected static Cache cache;
 	protected String userName;
 
@@ -27,10 +26,10 @@ public class BaseActivity extends Activity {
 
 	@Override
 	protected void onResume() {
+		super.onResume();
 		// …Ë÷√Œ™∫·∆¡
 		if (getRequestedOrientation() != ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE) {
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		}
-		super.onResume();
 	}
 }

@@ -109,11 +109,6 @@ public class MeasureGlucose extends BaseActivity {
 					sendCommd(BeneCheck.QUERY_UA_NUM);
 					sendCommd(BeneCheck.QUERY_CHOL_NUM);
 					uploadButton.setEnabled(true);// 设置上传按钮可以点击
-				} else if (view == homeButton) {
-					MeasureGlucose.this.setResult(RESULT_OK);
-					MeasureGlucose.this.finish();
-				} else if (view == returnButton) {
-					MeasureGlucose.this.finish();
 				} else if (view == uploadButton) {
 					uploadButton.setEnabled(false);// 上传后button不可点击
 					upload();
@@ -212,7 +207,7 @@ public class MeasureGlucose extends BaseActivity {
 				&& bluetoothService.getState() == BluetoothService.STATE_CONNECTED) {
 			status = View.VISIBLE;// 连接时设置可见
 		} else {
-			status = View.GONE;// 未连接时设置不可见
+			status = View.INVISIBLE;// 未连接时设置不可见
 		}
 		getDataButton.setVisibility(status);		
 	}
@@ -355,7 +350,7 @@ public class MeasureGlucose extends BaseActivity {
 						int num = BeneCheck.getNum(datas.get(datas.size() - 1));
 						if (num >= 1) {// 有记录时才去数据
 							byte[] command = BeneCheck.getLatestRecordCommand(
-									token, num);
+									token, 1);
 							sendCommd(command);// 得到了记录数目后,马上发送查询记录命令
 						} else {
 							noDataCount++;
