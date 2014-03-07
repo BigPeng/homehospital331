@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- android:background="@drawable/status_bar_closed_default_background" -->
-<com.android.server.status.StatusBarView xmlns:android="http://schemas.android.com/apk/res/android"
-  android:background="@drawable/topbg"
-  android:orientation="vertical"
-  android:focusable="true"
-  android:descendantFocusability="afterDescendants"
-  
-  ></com.android.server.status.StatusBarView>
